@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,4 +65,21 @@ public class BoardBService {
 		entity.update(params.getTitle(), params.getContent(), params.getWriter());
 		return id;
 	}
+
+	public Page<BoardB> findAll(PageRequest pageRequest) {
+		return boardBRepository.findAll(pageRequest);
+	}
+
+	public Page<BoardB> findAll(Pageable pageable) {
+		return boardBRepository.findAll(pageable);
+	}
+
+	public Page<BoardB> findByWriter(String string, Pageable pageable) {
+		return boardBRepository.findByWriter(string, pageable);
+	}
+
+	public Page<BoardB> findByTitleLike(String string, Pageable pageable) {
+		return boardBRepository.findByTitleLike(string, pageable);
+	}
+
 }
